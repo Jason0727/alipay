@@ -145,7 +145,7 @@ func (c *Client) getCertSN(cert *x509.Certificate) string {
 }
 
 // doAlipayRequest 发送请求
-func (c *Client) doAlipayRequest(httpMethod string, bm BodyMap, method string, appAuthToken string) (bs []byte, err error) {
+func (c *Client) doAlipayRequest(httpMethod string, bm BodyMap, method string, authToken string) (bs []byte, err error) {
 	var (
 		bizContent string
 		bodyBytes  []byte
@@ -153,8 +153,6 @@ func (c *Client) doAlipayRequest(httpMethod string, bm BodyMap, method string, a
 
 	// 设置请求参数集合
 	if bm != nil {
-		bm.Remove("app_auth_token") // 排除用户授权令牌传参
-
 		if bodyBytes, err = json.Marshal(bm); err != nil {
 			return nil, err
 		}
@@ -173,8 +171,8 @@ func (c *Client) doAlipayRequest(httpMethod string, bm BodyMap, method string, a
 	p.Add("version", Version)
 	p.Add("app_cert_sn", c.appCertSN)
 	p.Add("alipay_root_cert_sn", c.aliPayRootCertSN)
-	if appAuthToken != "" {
-		p.Add("app_auth_token", appAuthToken)
+	if authToken != "" {
+		p.Add("auth_token", authToken)
 	}
 	p.Add("biz_content", bizContent)
 

@@ -15,3 +15,20 @@ type AlipaySystemOauthTokenData struct {
 	RefreshToken string `json:"refresh_token,omitempty"`
 	UserId       string `json:"user_id,omitempty"`
 }
+
+type AlipayUserInfoShareResponse struct { // 支付宝文档返回结构有问题
+	Response     *AlipayUserInfoShareData `json:"alipay_user_info_share_response,omitempty"`
+	AlipayCertSn string                   `json:"alipay_cert_sn,omitempty"`
+	Sign         string                   `json:"sign,omitempty"`
+}
+
+type AlipayUserInfoShareData struct {
+	*ErrorResponse
+	UserId   string `json:"user_id,omitempty"`
+	Avatar   string `json:"avatar,omitempty"`
+	Province string `json:"province,omitempty"`
+	City     string `json:"city,omitempty"`
+	NickName string `json:"nick_name,omitempty"`
+	Gender   string `json:"gender,omitempty"`
+	Mobile   string `json:"mobile,omitempty"`
+}

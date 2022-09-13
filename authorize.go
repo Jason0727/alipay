@@ -41,3 +41,27 @@ func (c *Client) AlipaySystemOauthToken(bm BodyMap) (aliRsp *AlipaySystemOauthTo
 
 	return aliRsp, nil
 }
+
+// AlipayUserInfoShare 支付宝会员授权信息查询
+// 文档地址: https://opendocs.alipay.com/open/02xtlb
+func (c *Client) AlipayUserInfoShare(appAuthToken string) (aliRsp *AlipayUserInfoShareResponse, err error) {
+	var bs []byte
+	if bs, err = c.doAlipayRequest(HttpPostMethod, nil, "alipay.user.info.share", appAuthToken); err != nil {
+		return nil, err
+	}
+
+	aliRsp = new(AlipayUserInfoShareResponse)
+	if err = json.Unmarshal(bs, aliRsp); err != nil {
+		return nil, err
+	}
+
+	if err = c.AutoVerifySign(bs, aliRsp.AlipayCertSn, aliRsp.Sign); err != nil {
+		return nil, err
+	}
+
+	if aliRsp.Response.ErrorResponse != nil && aliRsp.Response.ErrorResponse.Code.IsSuccess() == false {
+		return aliRsp, errors.New(aliRsp.Response.ErrorResponse.Error())
+	}
+
+	return aliRsp, nil
+}
