@@ -6,6 +6,7 @@ import (
 )
 
 // AlipaySystemOauthToken 换取授权访问令牌
+// 文档地址: https://opendocs.alipay.com/open/02xtla
 func (c *Client) AlipaySystemOauthToken(bm BodyMap) (aliRsp *AlipaySystemOauthTokenResponse, err error) {
 	if err = bm.CheckEmptyError("grant_type"); err != nil {
 		return nil, err

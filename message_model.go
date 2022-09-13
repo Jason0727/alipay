@@ -6,5 +6,5 @@ type AliPayOpenAppMiniTemplateMessageSendResponse struct {
 	Sign         string                                    `json:"sign"`
 }
 type AliPayOpenAppMiniTemplateMessageSendData struct {
-	ErrorResponse *ErrorResponse `json:"error_response,omitempty"`
+	*ErrorResponse
 }
