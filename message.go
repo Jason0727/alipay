@@ -26,7 +26,7 @@ func (c *Client) AlipayOpenAppMiniTemplateMessageSend(bm BodyMap) (aliRsp *AliPa
 		return nil, err
 	}
 
-	if aliRsp.Response.ErrorResponse != nil {
+	if aliRsp.Response.ErrorResponse != nil && aliRsp.Response.ErrorResponse.Code.IsSuccess() == false {
 		return aliRsp, errors.New(aliRsp.Response.ErrorResponse.Error())
 	}
 
