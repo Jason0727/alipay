@@ -27,9 +27,15 @@ var client, err = alipay.NewClient(appID, privateKey, true)
 
 ## 已实现接口
 
-* **手机网站支付接口**
+* **换取授权访问令牌**
+   
+  alipay.system.oauth.token - **AlipaySystemOauthToken()**
+* **支付宝会员授权信息查询接口**
 
-  alipay.trade.wap.pay - **TradeWapPay()**
+  alipay.user.info.share - **AlipayUserInfoShare()**
+* **小程序发送模板消息**
+
+  alipay.open.app.mini.templatemessage.send - **AlipayOpenAppMiniTemplateMessageSend()**
 
 ## 集成流程
 

@@ -44,9 +44,9 @@ func (c *Client) AlipaySystemOauthToken(bm BodyMap) (aliRsp *AlipaySystemOauthTo
 
 // AlipayUserInfoShare 支付宝会员授权信息查询
 // 文档地址: https://opendocs.alipay.com/open/02xtlb
-func (c *Client) AlipayUserInfoShare(appAuthToken string) (aliRsp *AlipayUserInfoShareResponse, err error) {
+func (c *Client) AlipayUserInfoShare(authToken string) (aliRsp *AlipayUserInfoShareResponse, err error) {
 	var bs []byte
-	if bs, err = c.doAlipayRequest(HttpPostMethod, nil, "alipay.user.info.share", appAuthToken); err != nil {
+	if bs, err = c.doAlipayRequest(HttpPostMethod, nil, "alipay.user.info.share", authToken); err != nil {
 		return nil, err
 	}
 
