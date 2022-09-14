@@ -8,7 +8,6 @@ import (
 	"errors"
 	"fmt"
 	xaes "github.com/go-pay/gopay/pkg/aes"
-	"github.com/go-pay/gopay/pkg/util"
 	"reflect"
 )
 
@@ -61,7 +60,7 @@ func DecryptOpenDataToStruct(encryptedData, secretKey string, beanPtr interface{
 //	文档：https://opendocs.alipay.com/mini/introduce/aes
 //	文档：https://opendocs.alipay.com/open/common/104567
 func DecryptOpenDataToBodyMap(encryptedData, secretKey string) (bm BodyMap, err error) {
-	if encryptedData == util.NULL || secretKey == util.NULL {
+	if encryptedData == EMPTY || secretKey == EMPTY {
 		return nil, errors.New("encryptedData or secretKey is null")
 	}
 	var (
